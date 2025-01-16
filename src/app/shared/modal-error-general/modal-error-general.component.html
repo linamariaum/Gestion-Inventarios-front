@@ -1,0 +1,11 @@
+<div class="modal-header-custom">
+
+  <div *ngIf="mensajeError?.detail">
+    <h2 class="txt-primary txt-big" id="titulo-error">¡Atención!</h2>
+    <p class="txt-default txt-light" id="mensaje-error">{{ mensajeError.detail }}</p>
+  </div>
+
+</div>
+<div *nzModalFooter>
+  <button nz-button nzType="primary" id="boton-modal" (click)="modalRef.close()">Aceptar</button>
+</div>
