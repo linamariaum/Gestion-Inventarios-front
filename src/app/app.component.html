@@ -6,29 +6,24 @@
     [(nzCollapsed)]="isCollapsed"
     [nzTrigger]="null">
     <div class="sidebar-logo">
-      <a href="https://ng.ant.design/" target="_blank">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-        <h1>Ant Design Of Angular</h1>
+      <a routerLink="/inicio">
+        <img src="images/icono-inventario.png" alt="logo">
+        <h1>Gestion Inventarios</h1>
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+      <li nz-submenu nzOpen 
+      [nzTitle]="isAdministrador ? 'Gestión Administrativa' : 'Inventario'"
+      [nzIcon]="isAdministrador ? 'control' : 'product'" >
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/welcome">Welcome</a>
+            <a routerLink="/categorias">Categorías</a>
           </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Monitor</a>
+            <li nz-menu-item nzMatchRouter> <!--  *ngIf="!isAdministrador" -->
+            <a routerLink="/productos">Productos</a>
           </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Workplace</a>
-          </li>
-        </ul>
-      </li>
-      <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a>Basic Form</a>
+          <li nz-menu-item nzMatchRouter> <!--  *ngIf="isAdministrador" -->
+            <a routerLink="/clientes">Clientes</a>
           </li>
         </ul>
       </li>
@@ -41,7 +36,7 @@
             <span class="trigger"
                nz-icon
                [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-            ></span>
+            ></span>  Hola! {{usuarioAutenticado.username}}
         </span>
       </div>
     </nz-header>
