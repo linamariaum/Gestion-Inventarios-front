@@ -1,0 +1,8 @@
+<p>{{mensaje}}</p>
+
+<ng-container *ngIf="!isLogged; else loggedOut">
+    <button nz-button nzType="primary" class="tamano-boton-pequeno" id="login" (click)="mostrarLogin()">Autenticarse</button>
+</ng-container>
+<ng-template #loggedOut>
+    <button nz-button nzType="primary" class="tamano-boton-pequeno" id="logout" (click)="logout()">Log out</button>
+</ng-template>

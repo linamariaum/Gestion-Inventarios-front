@@ -1,0 +1,33 @@
+<form nz-form id="formularioLogin" [formGroup]="formularioLogin" (ngSubmit)="login()">
+    <div class="row">
+      <div class="col-lg-8">
+        <label for="username">Username <span class="required">*</span></label>
+        <nz-form-item>
+          <nz-form-control [appMensajesControlFormulario]="formularioLogin.controls['username'].errors" nzErrorTip="Please input your username!">
+            <nz-input-group nzPrefixIcon="user">
+                <input nz-input id="username" type="text" formControlName="username" placeholder="Ingrese el nombre de usuario" />
+              </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8">
+        <label for="password">Contraseña <span class="required">*</span></label>
+        <nz-form-item>
+          <nz-form-control [appMensajesControlFormulario]="formularioLogin.controls['password'].errors">
+              <nz-input-group nzPrefixIcon="lock">
+                  <input nz-input id="password" type="password" formControlName="password" placeholder="Ingrese la contraseña" />
+              </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div class="text-right">
+      <nz-form-item>
+        <nz-form-control>
+          <button nz-button nzType="primary" >Log in</button> <!-- [disabled]="!formularioLogin.valid" -->
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+</form>
