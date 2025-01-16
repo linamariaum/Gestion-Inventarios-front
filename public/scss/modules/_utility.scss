@@ -1,0 +1,33 @@
+//width
+@for $i from 1 through 10 {
+  .w-#{$i*10} {
+    width: #{$i * 10%} !important;
+  }
+}
+
+//Margins
+@for $i from 0 through 5 {
+  .m-#{$i} {
+    margin: #{0.5 * $i}rem !important;
+  }
+
+  @each $position in $ubicacion {
+    .m-#{$position}-#{$i} {
+      margin-#{$position}: #{0.5 * $i}rem !important;
+    }
+  }
+}
+
+
+//padding
+@for $i from 0 through 5 {
+  .p-#{$i} {
+    padding: #{0.5 * $i}rem !important;
+  }
+
+  @each $position in $ubicacion {
+    .p-#{$position}-#{$i} {
+      padding-#{$position}: #{0.5 * $i}rem !important;
+    }
+  }
+}

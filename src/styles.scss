@@ -1,1 +1,48 @@
-/* You can add global styles to this file, and also import other style files */
+// Modules and var
+@import "../public/scss/modules/var";
+@import "../public/scss/modules/mixins";
+@import "../public/scss/modules/utility";
+
+// Partials
+@import "../public/scss/partials/reset";
+@import "../public/scss/partials/typography";
+@import "../public/scss/partials/global";
+@import "../public/scss/partials/buttons";
+
+
+.tabla100 {
+    width: 100%
+}
+
+.dataNotfound {
+    margin: 32px 0;
+    color: $Black;
+    text-align: center;
+}
+
+div span i svg {
+    vertical-align: initial !important
+}
+
+.vertical-center-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vertical-center-modal .ant-modal {
+    top: 0
+}
+
+.container {
+    max-width: 1250px !important
+}
+
+.spacing {
+    margin-bottom: 25px;
+}
+
+.tabla-container {
+    max-height: 80vh;
+    overflow-y: auto;
+}

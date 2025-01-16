@@ -1,0 +1,261 @@
+// Generales
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $font-general;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background: $Bg-base;
+}
+
+.row {
+    margin: 10px 0;
+}
+// End Generales
+
+//Header
+header {
+    padding: 15px 0;
+    background: $Naranja;
+    border-top: 15px solid $Naranja-header;
+    border-bottom: 3px solid $Amarillo;
+    .user {
+        color: $White;
+        font-size: 15px;
+        text-align: right;
+        padding-right: 15px;
+        margin-right: 15px;
+        border-right: 2px solid $Naranja-header;
+        p {
+            margin: 0;
+            span {
+                color: $Beige;
+                font-weight: bolder;
+            }
+        }
+    }
+    .logo {
+        color: $White;
+        text-align: center;
+        padding-right: 15px;
+        margin-right: 15px;
+        border-right: 2px solid $Naranja-header;
+        p {
+            margin: 0;
+            span {
+                color: $Beige;
+                font-weight: bolder;
+            }
+            a {
+                font-weight: bolder;
+                text-decoration: none;
+            }
+        }
+    }
+    .menu {
+        color: $White;
+        text-align: center;
+        padding-right: 15px;
+        margin-right: 15px;
+        p {
+            margin: 0;
+            span {
+                color: $Beige;
+                font-weight: bolder;
+            }
+            a {
+                font-weight: bolder;
+                text-decoration: none;
+            }
+        }
+    }
+}
+// End Header
+
+// Footer
+.footer {
+    padding: 30px 0;
+    border-top: 1px solid $Bg-base;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background: $White;
+    margin-top: 20px;
+    .footer__bottom {
+        margin-top: 25px;
+        p {
+            font-size: 0.8125rem;
+            color: $Gray;
+            margin: 0;
+            text-align: center;
+        }
+    }
+}
+// End footer
+
+// Forms
+input.ant-input, nz-date-picker {
+    width: 100%;
+    background: transparent !important;
+    border-top: 0 !important;
+    border-right: 0 !important;
+    border-left: 0 !important;
+    border-bottom: 2px solid $line !important;
+    border-radius: 0 !important;
+    color: $Gray-dark !important;
+    padding-left: 4px !important;
+    font-size: 16px !important;
+    &:hover {
+        border-color: $Naranja;
+    }
+    &:focus {
+        border-color: $Naranja;
+        box-shadow: none;
+    }
+}
+
+nz-select {
+    width: 100%;
+    background: transparent;
+    border-top: 0;
+    border-left: 0;
+    border-radius: 0 !important;
+    border-right: 0;
+    border-bottom: 2px solid $line;
+    border-right-width: 0;
+    &:hover {
+        border-color: $Naranja;
+    }
+    &:focus {
+        border-color: $Naranja;
+        box-shadow: none;
+    }
+    .ant-select-arrow .ant-select-arrow-icon {
+        color: $Label;
+    }
+}
+
+label {
+    font-size: 14px;
+    margin-bottom: 0;
+    color: $Label;
+    span.required {
+        color: $Error;
+    }
+}
+
+.tabla-listado-acciones {
+    display: flex;
+    justify-content: center;
+    button.ant-btn {
+      margin: auto;
+    }
+}
+
+nz-select-top-control {
+    border: 0px !important;
+}
+//End Forms
+
+// Badges
+
+.estado {
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-weight: bold;
+    color: $White;
+    margin: 0 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    &.dato-relevante {
+        background: $Naranja;
+    }
+    &.actualizacion-fallida {
+        background: $Error;
+    }
+    &.aprobada {
+        background: $Success;
+    }
+    &.cancelada {
+        background: $Black;
+    }
+    &.enviada {
+        background: $Warning;
+    }
+}
+
+.card {
+    padding: 0;
+    border: 1px solid $Border-gray;
+    border-radius: 0;
+    box-shadow: 0 0px 3px $Shadow;
+    .header-card {
+        padding: 20px 20px 10px 20px;
+        border-bottom: 2px solid $line;
+        .title-card {
+            font-size: 18px;
+            color: $Naranja;
+            font-weight: bolder;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+        .Subtitle {
+            font-size: 14px;
+            color: $Gray-dark;
+            font-weight: bolder;
+            margin-bottom: 0;
+        }
+    }
+    .body-card {
+        padding: 5px;
+        color: $Label;
+        line-height: 20px;
+        label {
+            font-weight: regular;
+        }
+        p {
+            font-size: 16px;
+            font-weight: bolder;
+            margin: 0;
+        }
+    }
+    .footer-card {
+        text-align: right;
+        padding: 10px;
+    }
+}
+
+// Tabla
+thead.ant-table-thead {
+    span {
+        font-size: 12px;
+        font-weight: bold;
+        line-height: 12px;
+    }
+}
+
+tr.ant-table-row:nth-child(even) {
+    background: $even-table;
+}
+// End Tabla
+
+// Paginacion
+nz-pagination a {
+    text-decoration: none !important;
+}
+
+.modal-header-custom {
+    text-align: center;
+  
+    .modal-icon {
+      height: 55px;
+      width: 55px;
+      margin-bottom: 15px;
+    }
+}

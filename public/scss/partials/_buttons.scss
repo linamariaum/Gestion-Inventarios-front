@@ -1,0 +1,81 @@
+.ant-btn {
+  min-width: 160px;
+  height: 36px;
+  border-radius: 5px;
+  margin: 5px 10px;
+  background: $White;
+  border: 2px solid $Naranja;
+  color: $Naranja;
+  font-weight: bolder;
+  &:hover, :focus{
+    background: lighten($color: $Naranja, $amount: 60);
+    color: $Naranja;
+    border: 2px solid $Naranja;
+  }
+  &[disabled]{
+    background: $White !important;
+    border: 2px solid $Border !important;
+    color: $Border !important;
+    &.ant-btn-link{
+      background: transparent !important;
+      border: transparent !important;
+      span{
+        color: $Border !important;
+      }
+    }
+  }
+  .anticon{
+    vertical-align: inherit;
+  }
+  &.ant-btn-circle, .ant-btn-circle-outline{
+    border-radius: 50%;
+    min-width: 32px;
+    height: 32px;
+  }
+  &.ant-btn-icon-only{
+    min-width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+  &.ant-btn-round {
+    height: 32px;
+    border-radius: 32px;
+  }
+  &.ant-btn-primary{
+    background: $Naranja;
+    border-color: $Naranja;
+    color: $White;
+    &:hover{
+      background: lighten($color: $Naranja, $amount: 4);
+    }
+  }
+  &.ant-btn-Acent{
+    background: $Beige;
+    border: $Beige;
+    color: $White;
+    &:hover{
+      background: lighten($color: $Beige, $amount: 4);
+    }
+  }
+  &.ant-btn-secondary{
+    background: $Amarillo;
+    border: 2px solid $Amarillo;
+    color: $Naranja;
+    &:hover{
+      background: lighten($color: $Amarillo, $amount: 4);
+    }
+  }
+  &.ant-btn-link{
+    min-width: inherit;
+    background: transparent;
+    border: transparent;
+    span{
+      color: $Naranja;
+      text-decoration: underline;
+      &:hover{
+        font-weight: bolder;
+        color: darken($color: $Naranja, $amount: 4);
+      }
+    }
+  }
+}
