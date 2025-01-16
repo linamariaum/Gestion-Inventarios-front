@@ -21,9 +21,14 @@ export class CategoriaListaComponent implements OnInit {
   }
 
   listarCategorias(): void {
-    this.categoriaService.consultar().subscribe((data: Categoria[]) => {
-      this.categorias = data;
+    this.categoriaService.consultar().subscribe({
+      next: (data: Categoria[]) => {
+        this.categorias = data;
+        this.cargando = false;
+      },
+      error: () => {
+        this.cargando = false;
+      }
     });
-    this.cargando = false;
   }
 }
