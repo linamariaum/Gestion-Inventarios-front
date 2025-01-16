@@ -1,0 +1,6 @@
+<h1>Categorías</h1>
+<div *ngIf="isAdministrador" style="text-align: right">
+    <button nz-button nzType="primary" class="tamano-boton-pequeno" id="crear-categoria" (click)="crearCategoria()">Crear Categoría</button>
+</div>
+<div class="spacing"></div>
+<app-categoria-lista></app-categoria-lista>

@@ -1,0 +1,15 @@
+<p>Disponibles en el sistema</p>
+<nz-table #basicTable [nzData]="categorias" [nzBordered]="true" [nzLoading]="cargando">
+  <thead>
+      <tr>
+        <th scope="col"><strong>ID</strong></th>
+        <th scope="col"><strong>Nombre Categoría</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let categoria of basicTable.data">
+      <td>{{ categoria.id }}</td>
+      <td>{{ categoria.nombre }}</td>
+    </tr>
+  </tbody>
+</nz-table>

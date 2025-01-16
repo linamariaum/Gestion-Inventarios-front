@@ -1,0 +1,21 @@
+<form nz-form id="formularioLogin" [formGroup]="formularioCategoria" (ngSubmit)="crearCategoria()">
+    <div class="row">
+      <div class="col-lg-8">
+        <label for="nombre">Nombre categoría <span class="required">*</span></label>
+        <nz-form-item>
+          <nz-form-control [appMensajesControlFormulario]="formularioCategoria.controls['nombre'].errors">
+            <nz-input-group nzPrefixIcon="plus">
+                <input nz-input id="nombre" type="text" formControlName="nombre" placeholder="Ingrese el nombre de la categoría" />
+              </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div class="text-right">
+      <nz-form-item>
+        <nz-form-control>
+          <button nz-button nzType="primary">Crear</button>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+</form>
