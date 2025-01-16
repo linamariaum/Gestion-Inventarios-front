@@ -1,0 +1,57 @@
+<p>Productos del cliente </p>
+<nz-table #editRowTable nzBordered [nzData]="productos" nzTableLayout="fixed" [nzLoading]="cargando">
+  <thead>
+    <tr>
+      <th scope="col"><strong>ID</strong></th>
+      <th scope="col"><strong>Nombre</strong></th>
+      <th scope="col"><strong>Precio</strong></th>
+      <th scope="col"><strong>Stock</strong></th>
+      <th scope="col"><strong>Nombre Categoría</strong></th>
+      <th scope="col"><strong>Acciones</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (data of editRowTable.data; track data) {
+      <tr>
+        @if (!editCache[data.id].edit) {
+          <td>{{ data.id }}</td>
+          <td>{{ data.nombre }}</td>
+          <td>{{ data.precio }}</td>
+          <td>{{ data.cantidad }}</td>
+          <td>categoria</td>
+          <td class="tabla-listado-acciones">
+            <button nz-button nzType="link" (click)="startEdit(data.id)">
+              <i nz-icon nzType="edit" nz-tooltip="Modificar producto"></i>
+            </button>
+          </td>
+        } @else {
+          <td>{{ editCache[data.id].data.id }}</td>
+          <td>
+            <nz-input-group nzPrefixIcon="form">
+              <input type="text" nz-input [(ngModel)]="editCache[data.id].data.nombre" />
+            </nz-input-group>
+          </td>
+          <td>
+            <nz-input-group nzPrefixIcon="dollar">
+              <input type="number" nz-input [(ngModel)]="editCache[data.id].data.precio" />
+            </nz-input-group>
+          </td>
+          <td>
+            <nz-input-group nzPrefixIcon="calculator">
+              <input type="number" nz-input [(ngModel)]="editCache[data.id].data.cantidad" />
+            </nz-input-group>
+          </td>
+          <td>categoria</td>
+          <td class="tabla-listado-acciones">
+            <button nz-button nzType="link" class="save" nz-popconfirm nzPopconfirmTitle="¿Desea aplicar los cambios al producto?" (nzOnConfirm)="saveEdit(data.id)">
+              <i nz-icon nzType="save" nz-tooltip="Guardar cambios"></i>
+            </button>
+            <button nz-button nzType="link" (click)="cancelEdit(data.id)">
+              <i nz-icon nzType="close-square" nz-tooltip="Cancelar edición"></i>
+            </button>
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
+</nz-table>
