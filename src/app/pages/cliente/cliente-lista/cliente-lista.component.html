@@ -1,0 +1,26 @@
+<p>Clientes en el sistema</p>
+<div class="tabla-container">
+  <div style="text-align: right">
+    <button nz-button nzType="primary" class="tamano-boton-pequeno" (click)="listarClientes()">
+      <i nz-icon nzType="sync" nz-tooltip="Consultar los clientes"></i>
+    </button>
+  </div>
+  <nz-table #basicTable [nzData]="clientes" [nzBordered]="true" [nzPageSize]="8" [nzScroll]="{ y: '500px' }" [nzLoading]="cargando">
+    <thead>
+        <tr>
+          <th scope="col"><strong>ID</strong></th>
+          <th scope="col"><strong>Nombre</strong></th>
+          <th scope="col"><strong>Correo electrónico</strong></th>
+          <th scope="col"><strong>Teléfono</strong></th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let categoria of basicTable.data">
+        <td>{{ categoria.id }}</td>
+        <td>{{ categoria.nombre }}</td>
+        <td>{{ categoria.email }}</td>
+        <td>{{ categoria.telefono }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
