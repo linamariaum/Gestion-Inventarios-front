@@ -11,42 +11,42 @@
     </tr>
   </thead>
   <tbody>
-    @for (data of editRowTable.data; track data) {
+    @for (productoListado of editRowTable.data; track productoListado) {
       <tr>
-        @if (!editCache[data.id].edit) {
-          <td>{{ data.id }}</td>
-          <td>{{ data.nombre }}</td>
-          <td>{{ data.precio }}</td>
-          <td>{{ data.cantidad }}</td>
+        @if (!productosEditablesCache[productoListado.id].editando) {
+          <td>{{ productoListado.id }}</td>
+          <td>{{ productoListado.nombre }}</td>
+          <td>{{ productoListado.precio }}</td>
+          <td>{{ productoListado.cantidad }}</td>
           <td>categoria</td>
           <td class="tabla-listado-acciones">
-            <button nz-button nzType="link" (click)="startEdit(data.id)">
+            <button nz-button nzType="link" (click)="iniciarEdicion(productoListado.id)">
               <i nz-icon nzType="edit" nz-tooltip="Modificar producto"></i>
             </button>
           </td>
         } @else {
-          <td>{{ editCache[data.id].data.id }}</td>
+          <td>{{ productosEditablesCache[productoListado.id].producto.id }}</td>
           <td>
             <nz-input-group nzPrefixIcon="form">
-              <input type="text" nz-input [(ngModel)]="editCache[data.id].data.nombre" />
+              <input type="text" nz-input [(ngModel)]="productosEditablesCache[productoListado.id].producto.nombre" />
             </nz-input-group>
           </td>
           <td>
             <nz-input-group nzPrefixIcon="dollar">
-              <input type="number" nz-input [(ngModel)]="editCache[data.id].data.precio" />
+              <input type="number" nz-input [(ngModel)]="productosEditablesCache[productoListado.id].producto.precio" />
             </nz-input-group>
           </td>
           <td>
             <nz-input-group nzPrefixIcon="calculator">
-              <input type="number" nz-input [(ngModel)]="editCache[data.id].data.cantidad" />
+              <input type="number" nz-input [(ngModel)]="productosEditablesCache[productoListado.id].producto.cantidad" />
             </nz-input-group>
           </td>
           <td>categoria</td>
           <td class="tabla-listado-acciones">
-            <button nz-button nzType="link" class="save" nz-popconfirm nzPopconfirmTitle="¿Desea aplicar los cambios al producto?" (nzOnConfirm)="saveEdit(data.id)">
+            <button nz-button nzType="link" class="save" nz-popconfirm nzPopconfirmTitle="¿Desea aplicar los cambios al producto?" (nzOnConfirm)="guardarEdicion(productoListado.id)">
               <i nz-icon nzType="save" nz-tooltip="Guardar cambios"></i>
             </button>
-            <button nz-button nzType="link" (click)="cancelEdit(data.id)">
+            <button nz-button nzType="link" (click)="cancelarEdicion(productoListado.id)">
               <i nz-icon nzType="close-square" nz-tooltip="Cancelar edición"></i>
             </button>
           </td>

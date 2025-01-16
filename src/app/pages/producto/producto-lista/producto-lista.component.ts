@@ -19,7 +19,7 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 export class ProductoListaComponent implements OnInit {
   productos: Producto[] = [];
   cargando = true;
-  editCache: { [key: string]: { edit: boolean; data: Producto } } = {};
+  productosEditablesCache: { [key: string]: { editando: boolean; producto: Producto } } = {};
 
   constructor(private readonly productoService: ProductoService) {}
 
@@ -28,39 +28,44 @@ export class ProductoListaComponent implements OnInit {
   }
 
   listarProductos(): void {
-    this.productoService.consultarProductos().subscribe((data: Producto[]) => {
-      this.productos = data;
-      this.updateEditCache();
+    this.productoService.consultarProductos().subscribe({
+      next: (data: Producto[]) => {
+        this.productos = data;
+        this.actualizarListaProductosEditablesCache();
+        this.cargando = false;
+      },
+      error: () => {
+        this.cargando = false;
+      }
     });
-    this.cargando = false;
   }
 
-  updateEditCache(): void {
+  actualizarListaProductosEditablesCache(): void {
     this.productos.forEach(item => {
-      this.editCache[item.id] = {
-        edit: false,
-        data: { ...item }
+      this.productosEditablesCache[item.id] = {
+        editando: false,
+        producto: { ...item }
       };
     });
   }
 
-  startEdit(id: string): void {
-    this.editCache[id].edit = true;
+  iniciarEdicion(id: string): void {
+    this.productosEditablesCache[id].editando = true;
   }
 
-  cancelEdit(id: string): void {
+  cancelarEdicion(id: string): void {
     const index = this.productos.findIndex(item => item.id === id);
-    this.editCache[id] = {
-      data: { ...this.productos[index] },
-      edit: false
+    this.productosEditablesCache[id] = {
+      producto: { ...this.productos[index] },
+      editando: false
     };
   }
 
-  saveEdit(id: string): void {
+  guardarEdicion(id: string): void {
     const index = this.productos.findIndex(item => item.id === id);
-    Object.assign(this.productos[index], this.editCache[id].data);
-    this.editCache[id].edit = false;
-    this.productoService.actualizar(this.editCache[id].data).subscribe();
+    Object.assign(this.productos[index], this.productosEditablesCache[id].producto);
+    this.productosEditablesCache[id].editando = false;
+    this.productoService.actualizar(this.productosEditablesCache[id].producto).subscribe((productoActualizado: Producto) => {console.log(productoActualizado);});
   }
 
 }
