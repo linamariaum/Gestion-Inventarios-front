@@ -40,7 +40,10 @@
               "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -73,7 +76,8 @@
               "buildTarget": "Gestion-Inventarios-front:build:production"
             },
             "development": {
-              "buildTarget": "Gestion-Inventarios-front:build:development"
+              "buildTarget": "Gestion-Inventarios-front:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

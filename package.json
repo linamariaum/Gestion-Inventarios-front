@@ -6,7 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "test-headless": "ng test --browsers ChromeHeadlessFull --code-coverage=true --watch=false",
+    "test-chrome": "ng test --browsers Chrome --code-coverage=true",
+    "sonar": "sonar-scanner"
   },
   "private": true,
   "dependencies": {
@@ -18,6 +21,7 @@
     "@angular/platform-browser": "^18.1.0",
     "@angular/platform-browser-dynamic": "^18.1.0",
     "@angular/router": "^18.1.0",
+    "@ctrl/tinycolor": "^4.1.0",
     "ng-zorro-antd": "^18.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
