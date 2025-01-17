@@ -2,7 +2,6 @@
 <nz-table #editRowTable nzBordered [nzData]="productos" nzTableLayout="fixed" [nzLoading]="cargando">
   <thead>
     <tr>
-      <th scope="col"><strong>ID</strong></th>
       <th scope="col"><strong>Nombre</strong></th>
       <th scope="col"><strong>Precio</strong></th>
       <th scope="col"><strong>Stock</strong></th>
@@ -14,7 +13,6 @@
     @for (productoListado of editRowTable.data; track productoListado) {
       <tr>
         @if (!productosEditablesCache[productoListado.id].editando) {
-          <td>{{ productoListado.id }}</td>
           <td>{{ productoListado.nombre }}</td>
           <td><i nz-icon nzType="dollar"></i> {{ productoListado.precio }}</td>
           <td>{{ productoListado.cantidad }}</td>
@@ -25,7 +23,6 @@
             </button>
           </td>
         } @else {
-          <td>{{ productosEditablesCache[productoListado.id].producto.id }}</td>
           <td>
             <nz-input-group nzPrefixIcon="form">
               <input type="text" nz-input [(ngModel)]="productosEditablesCache[productoListado.id].producto.nombre" />

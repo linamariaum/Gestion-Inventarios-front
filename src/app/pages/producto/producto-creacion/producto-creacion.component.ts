@@ -5,6 +5,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 import { MensajesControlFormularioDirective } from '../../../shared/directivas/mensajes-controles-formulario.directive';
 import { NotificacionService } from '../../../services/notificacion.service';
@@ -15,13 +16,13 @@ import { ProductoService } from '../../../services/producto.service';
 import { ProductoCreacion } from '../../../models/producto-creacion';
 import { ClienteService } from '../../../services/cliente.service';
 import { Cliente } from '../../../models/cliente';
-
+import { ArchivoService } from '../../../services/archivo.service';
 
 @Component({
   selector: 'app-producto-creacion',
   standalone: true,
   templateUrl: './producto-creacion.component.html',
-  imports: [ReactiveFormsModule, NzButtonModule, NzFormModule, NzInputModule, MensajesControlFormularioDirective, NzSelectModule, FormsModule]
+  imports: [ReactiveFormsModule, NzButtonModule, NzFormModule, NzInputModule, MensajesControlFormularioDirective, NzSelectModule, FormsModule, NzDividerModule]
 })
 export class ProductoCreacionComponent implements OnInit {
     formularioProducto!: FormGroup;
@@ -32,7 +33,8 @@ export class ProductoCreacionComponent implements OnInit {
         private readonly formbuilder: FormBuilder,
         private readonly categoriaService: CategoriaService,
         private readonly productoService: ProductoService,
-        private readonly clienteService: ClienteService
+        private readonly clienteService: ClienteService,
+        private readonly archivoService: ArchivoService
     ) {}
 
     ngOnInit(): void {
@@ -81,5 +83,25 @@ export class ProductoCreacionComponent implements OnInit {
                 }
         });
         this.nzModalRef.close();
+    }
+
+    async cargaMasiva(event: any): Promise<void> {
+        const file = event.target.files[0];
+        const estructuraValida = await this.archivoService.validarEstructuraArchivoCSV(file, ['nombre', 'idCategoria', 'precio', 'cantidad']);
+        if (estructuraValida) {
+            this.productoService.cargaMasiva(file).subscribe({
+                next: () => {
+                    this.notificacionService.abrirNotificacionExito('Productos cargadas correctamente');
+                    this.nzModalRef.close();
+                },
+                error: () => {
+                    this.notificacionService.abrirNotificacionError('Error al cargar productos');
+                    this.nzModalRef.close();
+                }
+            });
+        } else {
+            this.notificacionService.abrirNotificacionError('El archivo no es válido o no contiene las columnas requeridas');
+            this.nzModalRef.close();
+        }
     }
 }

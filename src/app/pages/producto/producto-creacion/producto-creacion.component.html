@@ -55,3 +55,10 @@
     </nz-form-item>
   </div>
 </form>
+<nz-divider nzVariant="solid"></nz-divider>
+<div style="text-align: right">
+  <button nz-button nzType="primary" class="tamano-boton-pequeno" id="carga-masiva-productos" (click)="dialogoCargarArchivo.click()">Carga masiva productos archivo .csv</button>
+  <div class="text-right">
+    <input type="file" #dialogoCargarArchivo style="display: none" (change)="cargaMasiva($event)" accept=".csv" />
+  </div>
+</div>

@@ -17,6 +17,12 @@ export class ProductoService extends HttpService {
     super(http);
   }
 
+  public cargaMasiva(productos: File): Observable<any> {
+    const formDataProductos = new FormData();
+    formDataProductos.append('file', productos, productos.name);
+    return this.doPostFile<object, any>(`${this.URL}/carga-masiva`, formDataProductos);
+  }
+
   public crear(producto: ProductoCreacion): Observable<Producto> {
     return this.doPost(`${this.URL}`, producto).pipe(map((response) => response as Producto));
   }
