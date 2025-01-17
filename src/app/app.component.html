@@ -19,10 +19,10 @@
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/categorias">Categorías</a>
           </li>
-            <li nz-menu-item nzMatchRouter> <!--  *ngIf="!isAdministrador" -->
+            <li nz-menu-item nzMatchRouter *ngIf="!isAdministrador">
             <a routerLink="/productos">Productos</a>
           </li>
-          <li nz-menu-item nzMatchRouter> <!--  *ngIf="isAdministrador" -->
+          <li nz-menu-item nzMatchRouter *ngIf="isAdministrador">
             <a routerLink="/clientes">Clientes</a>
           </li>
         </ul>

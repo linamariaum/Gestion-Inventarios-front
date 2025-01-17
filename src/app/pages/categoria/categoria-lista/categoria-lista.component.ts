@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+
 import { CategoriaService } from '../../../services/categoria.service';
 import { Categoria } from '../../../models/categoria';
-import { NzTableModule } from 'ng-zorro-antd/table';
 
 @Component({
   selector: 'app-categoria-lista',
   standalone: true,
   templateUrl: './categoria-lista.component.html',
-  imports: [CommonModule, NzTableModule]
+  imports: [CommonModule, NzTableModule, NzIconModule]
 })
 export class CategoriaListaComponent implements OnInit {
   categorias: Categoria[] = [];
