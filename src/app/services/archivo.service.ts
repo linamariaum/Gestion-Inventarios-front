@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import * as Papa from 'papaparse';
+import { WorkBook, utils } from "xlsx";
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,10 @@ export class ArchivoService {
             }
           });
         });
+    }
+
+    public generarHojaExcelGenerica(workBook: WorkBook, nombreHoja: string, encabezado: string[], datos: any[]): void {
+      const worksheet = utils.aoa_to_sheet([encabezado, ...datos]);
+      utils.book_append_sheet(workBook, worksheet, nombreHoja);
     }
 }

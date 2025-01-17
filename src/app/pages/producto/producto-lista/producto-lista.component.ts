@@ -8,9 +8,15 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+/* https://docs.sheetjs.com/docs/demos/frontend/angular/
+  https://docs.sheetjs.com/docs/getting-started/installation/frameworks
+*/
+import { utils, writeFile } from 'xlsx';
 
 import { ProductoService } from '../../../services/producto.service';
 import { Producto } from '../../../models/producto';
+import { ArchivoService } from '../../../services/archivo.service';
+import { NotificacionService } from '../../../services/notificacion.service';
 
 @Component({
   selector: 'app-producto-lista',
@@ -23,7 +29,9 @@ export class ProductoListaComponent implements OnInit {
   cargando = true;
   productosEditablesCache: { [key: string]: { editando: boolean; producto: Producto } } = {};
 
-  constructor(private readonly productoService: ProductoService) {}
+  constructor(private readonly productoService: ProductoService,
+    private readonly archivoService: ArchivoService,
+    private readonly notificacionService: NotificacionService) {}
 
   ngOnInit(): void {
     this.listarProductos();
@@ -70,4 +78,28 @@ export class ProductoListaComponent implements OnInit {
     this.productoService.actualizar(this.productosEditablesCache[id].producto).subscribe((productoActualizado: Producto) => {console.log(productoActualizado);});
   }
 
+  descargarProductos(): void {
+    if (this.productos.length) {
+      const workbook = utils.book_new();
+      const encabezado = Object.values(['ID', 'NOMBRE', 'CATEGORIA', 'PRECIO', 'CANTIDAD']);
+      const datos: string[][] = this.construirDatosParaDescargar(this.productos);
+      this.archivoService.generarHojaExcelGenerica(workbook, 'Productos', encabezado, datos);
+      writeFile(workbook, 'Productos.xlsx', {compression: true});
+    } else {
+      this.notificacionService.abrirNotificacionAdvertencia('No hay productos para descargar');
+    }
+  }
+
+  construirDatosParaDescargar(productos: Producto[]): string[][] {
+    return productos.map(
+      (producto: Producto) => {
+        return {
+          id: producto.id,
+          nombre: producto.nombre,
+          categoria: producto.categoria?.nombre,
+          precio: producto.precio,
+          cantidad: producto.cantidad
+        }
+      }).map(dato => Object.values(dato).map(value => value ? value.toString() : ''));
+  }
 }

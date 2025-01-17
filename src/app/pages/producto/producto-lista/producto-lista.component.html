@@ -1,4 +1,7 @@
 <p>Productos del cliente </p>
+<div style="text-align: right">
+  <button nz-button nzType="primary" class="tamano-boton-pequeno"  id="descargar-productos" (click)="descargarProductos()">Descargar productos.xlsx</button>
+</div>
 <nz-table #editRowTable nzBordered [nzData]="productos" nzTableLayout="fixed" [nzLoading]="cargando">
   <thead>
     <tr>
