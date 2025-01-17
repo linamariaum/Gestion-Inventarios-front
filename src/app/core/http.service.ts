@@ -85,6 +85,18 @@ export class HttpService {
     );
   }
 
+  httpOptionsCargaMasiva = {
+    'responseType'  : 'blob' as 'json'
+  };
+
+  protected doPostFile<T, R>(serviceUrl: string, body: T, params?: HttpParams): Observable<R> {
+    const option = {
+      ...this.httpOptionsCargaMasiva,
+      params
+    }
+    return this.http.post(serviceUrl, body, option).pipe(map((response) => response as R));
+  }
+
   protected doPut<T, R>(serviceUrl: string, body: T, opts?: Options): Observable<R> {
     const ropts = this.createOptions(opts);
 
