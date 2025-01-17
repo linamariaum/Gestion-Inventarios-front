@@ -8,6 +8,8 @@ import { Token } from '../core/token';
 import { NotificacionService } from './notificacion.service';
 import { Usuario } from '../models/usuario';
 import { Constantes } from '../core/constantes';
+import { ClienteService } from './cliente.service';
+import { Cliente } from '../models/cliente';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,8 @@ export class AuthService extends HttpService {
   public usuario$: Observable<Usuario> = this.usuarioSubject.asObservable();
 
   constructor(protected override http: HttpClient,
-          private readonly notificacionService: NotificacionService) {
+          private readonly notificacionService: NotificacionService,
+          private readonly clienteService: ClienteService) {
     super(http);
   }
 
@@ -32,7 +35,15 @@ export class AuthService extends HttpService {
 
   private setSession(token: Token, username: string) {
     sessionStorage.setItem('id_token', token.access_token);
-    this.usuarioSubject.next({ username: username, rol: token.rol });
+    if (token.rol === this.ADMIN) {
+      this.usuarioSubject.next({ username: username.toUpperCase(), rol: token.rol });
+    } else {
+      this.clienteService.consultarClienteAutenticado().subscribe({
+        next: (cliente: Cliente) => {
+          this.usuarioSubject.next({ username: cliente.nombre, rol: token.rol });
+        }
+      });
+    }
   }
 
   isLogged(): boolean {
