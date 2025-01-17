@@ -13,6 +13,11 @@ export class HttpService {
   private readonly CONTENT_TYPE_HEADER = 'Content-Type';
   private readonly TYPE_JSON = 'application/json';
   private readonly TYPE_FORM_DATA = 'application/x-www-form-urlencoded';
+  private readonly TYPE_MULTIPART_FORM_DATA = 'multipart/form-data';
+
+  private readonly httpOptionsCargaMasiva = {
+    'responseType'  : 'blob' as 'json'
+  };
 
   constructor(protected http: HttpClient) { }
 
@@ -80,14 +85,8 @@ export class HttpService {
     }
     const ropts = this.createOptions(opts);
 
-    return this.http.post(serviceUrl, body, ropts).pipe(
-      map(response => response as R)
-    );
+    return this.http.post(serviceUrl, body, ropts).pipe(map(response => response as R));
   }
-
-  httpOptionsCargaMasiva = {
-    'responseType'  : 'blob' as 'json'
-  };
 
   protected doPostFile<T, R>(serviceUrl: string, body: T, params?: HttpParams): Observable<R> {
     const option = {

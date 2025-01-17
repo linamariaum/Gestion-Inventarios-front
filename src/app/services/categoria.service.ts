@@ -6,7 +6,6 @@ import { HttpService } from '../core/http.service';
 import { ConstantesRutas } from '../core/constantes-rutas';
 import { Categoria } from '../models/categoria';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -23,5 +22,11 @@ export class CategoriaService extends HttpService {
 
   public consultar(): Observable<Categoria[]> {
     return this.doGet<Categoria[]>(`${this.URL}`).pipe(map((response: Categoria[]) => response));
+  }
+
+  public cargaMasiva(categorias: File): Observable<any> {
+    const formDataCategorias = new FormData();
+    formDataCategorias.append('file', categorias, categorias.name);
+    return this.doPostFile<object, any>(`${this.URL}/carga-masiva`, formDataCategorias);
   }
 }

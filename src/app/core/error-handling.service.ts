@@ -32,8 +32,15 @@ export class ErrorHandlingService {
         this.mostrarModalSinAutorizacion();
         this.router.navigate(['/inicio']);
         break;
-      default:       
-        this.mostrarModalErrorGeneral(error.error);
+      default:
+        if (error.error instanceof Blob && error.error.type === 'application/json') {
+          error.error.text().then((text) => {
+            const jsonError = JSON.parse(text);
+            this.mostrarModalErrorGeneral(jsonError);
+          });
+        } else {
+          this.mostrarModalErrorGeneral(error.error);
+        }
         return throwError(() => error);
     }
     return throwError(() => error);
@@ -55,6 +62,8 @@ export class ErrorHandlingService {
   }
 
   private mostrarModalErrorGeneral(errorDetail: Mensaje): NzModalRef {
+    console.log('Error en la petición: ');
+    console.log(errorDetail);
     return this.nzModalService.create<ModalErrorGeneralComponent, Mensaje>({
       nzData: errorDetail,
       nzContent: ModalErrorGeneralComponent,
