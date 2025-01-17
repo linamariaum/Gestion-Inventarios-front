@@ -1,0 +1,57 @@
+<form nz-form id="formularioProducto" [formGroup]="formularioProducto" (ngSubmit)="crearProducto()">
+  <div class="row">
+    <div class="col-lg-8">
+      <label for="nombre">Nombre producto <span class="required">*</span></label>
+      <nz-form-item>
+        <nz-form-control [appMensajesControlFormulario]="formularioProducto.controls['nombre'].errors">
+          <nz-input-group nzPrefixIcon="plus-square">
+              <input nz-input id="nombre" type="text" formControlName="nombre" placeholder="Ingrese el nombre del producto" />
+            </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <label for="categoria">Categoría <span class="required">*</span></label>
+    <nz-form-item>
+      <nz-form-control [appMensajesControlFormulario]="formularioProducto.controls['idCategoria'].errors">
+        <nz-select id="categoria" formControlName="idCategoria" nzShowSearch nzPlaceHolder="Seleccione la categoría" nzSuffixIcon="tag">
+          @for (categoria of categorias; track categoria) {
+            <nz-option [nzValue]="categoria.id" [nzLabel]="categoria.nombre"></nz-option>
+          }
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+  <div class="row">
+    <div class="col-lg-8">
+      <label for="precio">Precio <span class="required">*</span></label>
+      <nz-form-item>
+        <nz-form-control [appMensajesControlFormulario]="formularioProducto.controls['precio'].errors">
+          <nz-input-group nzPrefixIcon="dollar">
+              <input nz-input id="precio" type="number" formControlName="precio" placeholder="Ingrese el precio" />
+            </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-8">
+      <label for="cantidad">Cantidad <span class="required">*</span></label>
+      <nz-form-item>
+        <nz-form-control [appMensajesControlFormulario]="formularioProducto.controls['cantidad'].errors">
+          <nz-input-group nzPrefixIcon="calculator">
+              <input nz-input id="cantidad" type="number" formControlName="cantidad" placeholder="Ingrese la cantidad del producto" />
+            </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div class="text-right">
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary">Crear</button>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+</form>

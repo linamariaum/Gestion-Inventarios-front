@@ -1,20 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { Producto } from '../../../models/producto';
 import { FormsModule } from '@angular/forms';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
-import { ProductoService } from '../../../services/producto.service';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+
+import { ProductoService } from '../../../services/producto.service';
+import { Producto } from '../../../models/producto';
 
 @Component({
   selector: 'app-producto-lista',
   standalone: true,
   templateUrl: './producto-lista.component.html',
-  imports: [CommonModule, FormsModule, NzInputModule, NzPopconfirmModule, NzTableModule, NzIconModule, NzButtonModule, NzToolTipModule]
+  imports: [CommonModule, FormsModule, NzInputModule, NzPopconfirmModule, NzTableModule, NzIconModule, NzButtonModule, NzToolTipModule, NzDividerModule]
 })
 export class ProductoListaComponent implements OnInit {
   productos: Producto[] = [];
