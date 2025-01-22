@@ -8,10 +8,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
-/* https://docs.sheetjs.com/docs/demos/frontend/angular/
-  https://docs.sheetjs.com/docs/getting-started/installation/frameworks
-*/
-import { utils, writeFile } from 'xlsx';
 
 import { ProductoService } from '../../../services/producto.service';
 import { Producto } from '../../../models/producto';
@@ -73,18 +69,28 @@ export class ProductoListaComponent implements OnInit {
 
   guardarEdicion(id: string): void {
     const index = this.productos.findIndex(item => item.id === id);
+    const productoOriginal = this.productos[index];
     Object.assign(this.productos[index], this.productosEditablesCache[id].producto);
     this.productosEditablesCache[id].editando = false;
-    this.productoService.actualizar(this.productosEditablesCache[id].producto).subscribe((productoActualizado: Producto) => {console.log(productoActualizado);});
+    this.productoService.actualizar(this.productosEditablesCache[id].producto)
+    .subscribe({
+      next: (productoActualizado: Producto) => {
+        this.notificacionService.abrirNotificacionExito(`Producto ${productoActualizado.nombre} actualizado correctamente`);
+      },
+      error: () => {
+        this.notificacionService.abrirNotificacionError('Error al actualizar el producto');
+        this.productosEditablesCache[id].producto = productoOriginal;
+      }
+    });
   }
 
   descargarProductos(): void {
     if (this.productos.length) {
-      const workbook = utils.book_new();
+      const workbook = this.archivoService.createWorkbook();
       const encabezado = Object.values(['ID', 'NOMBRE', 'CATEGORIA', 'PRECIO', 'CANTIDAD']);
       const datos: string[][] = this.construirDatosParaDescargar(this.productos);
       this.archivoService.generarHojaExcelGenerica(workbook, 'Productos', encabezado, datos);
-      writeFile(workbook, 'Productos.xlsx', {compression: true});
+      this.archivoService.writeFile(workbook, 'Productos.xlsx');
     } else {
       this.notificacionService.abrirNotificacionAdvertencia('No hay productos para descargar');
     }

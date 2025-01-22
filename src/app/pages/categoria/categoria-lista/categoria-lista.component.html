@@ -7,9 +7,9 @@
       </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let categoria of basicTable.data">
-      <td>{{ categoria.id }}</td>
-      <td><i nz-icon nzType="tag"></i> {{ categoria.nombre }}</td>
+    <tr *ngFor="let categoria of basicTable.data; let i = index">
+      <td [id]="'categoria-id-' + i">{{ categoria.id }}</td>
+      <td [id]="'categoria-nombre-' + i"><i nz-icon nzType="tag"></i> {{ categoria.nombre }}</td>
     </tr>
   </tbody>
 </nz-table>

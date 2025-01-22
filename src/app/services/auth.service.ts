@@ -16,7 +16,7 @@ import { Cliente } from '../models/cliente';
 })
 export class AuthService extends HttpService {
   readonly ADMIN = Constantes.ADMIN;
-  private readonly usuarioSubject: BehaviorSubject<Usuario> = new BehaviorSubject<Usuario>({ username: '', rol: '' });
+  public readonly usuarioSubject: BehaviorSubject<Usuario> = new BehaviorSubject<Usuario>({ username: '', rol: '' });
   public usuario$: Observable<Usuario> = this.usuarioSubject.asObservable();
 
   constructor(protected override http: HttpClient,

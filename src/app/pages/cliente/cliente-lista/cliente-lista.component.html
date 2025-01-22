@@ -1,7 +1,7 @@
 <p>Clientes en el sistema</p>
 <div class="tabla-container">
   <div style="text-align: right">
-    <button nz-button nzType="primary" class="tamano-boton-pequeno" (click)="listarClientes()">
+    <button nz-button nzType="primary" class="tamano-boton-pequeno" (click)="listarClientes()" id="btnRecargar">
       <i nz-icon nzType="sync" nz-tooltip="Consultar los clientes"></i>
     </button>
   </div>
@@ -15,11 +15,11 @@
         </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let categoria of basicTable.data">
-        <td>{{ categoria.id }}</td>
-        <td><i nz-icon nzType="contacts"></i> {{ categoria.nombre }}</td>
-        <td>{{ categoria.email }}</td>
-        <td>{{ categoria.telefono }}</td>
+      <tr *ngFor="let cliente of basicTable.data; let i = index">
+        <td [id]="'cliente-id-' + i">{{ cliente.id }}</td>
+        <td [id]="'cliente-nombre-' + i"><i nz-icon nzType="contacts"></i> {{ cliente.nombre }}</td>
+        <td [id]="'cliente-email-' + i">{{ cliente.email }}</td>
+        <td [id]="'cliente-telefono-' + i">{{ cliente.telefono }}</td>
       </tr>
     </tbody>
   </nz-table>

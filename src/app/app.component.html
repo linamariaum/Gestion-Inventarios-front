@@ -8,21 +8,21 @@
     <div class="sidebar-logo">
       <a routerLink="/inicio">
         <img src="images/icono-inventario.png" alt="logo">
-        <h1>Gestion Inventarios</h1>
+        <h1 id="titulo">{{title}}</h1>
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen 
+      <li nz-submenu nzOpen id="submenu-inicio"
       [nzTitle]="isAdministrador ? 'Gestión Administrativa' : 'Inventario'"
       [nzIcon]="isAdministrador ? 'control' : 'product'" >
         <ul>
-          <li nz-menu-item nzMatchRouter>
+          <li nz-menu-item nzMatchRouter id="item-categorias">
             <a routerLink="/categorias">Categorías</a>
           </li>
-            <li nz-menu-item nzMatchRouter *ngIf="!isAdministrador">
+            <li nz-menu-item nzMatchRouter id="item-productos" *ngIf="!isAdministrador">
             <a routerLink="/productos">Productos</a>
           </li>
-          <li nz-menu-item nzMatchRouter *ngIf="isAdministrador">
+          <li nz-menu-item nzMatchRouter id="item-clientes" *ngIf="isAdministrador">
             <a routerLink="/clientes">Clientes</a>
           </li>
         </ul>
@@ -32,7 +32,7 @@
   <nz-layout>
     <nz-header>
       <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed" id="nombre-username">
             <span class="trigger"
                nz-icon
                [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"

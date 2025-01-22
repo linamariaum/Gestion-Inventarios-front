@@ -3,7 +3,7 @@
     <div class="col-lg-8">
       <label for="nombre">Nombre producto <span class="required">*</span></label>
       <nz-form-item>
-        <nz-form-control [appMensajesControlFormulario]="formularioProducto.controls['nombre'].errors">
+        <nz-form-control [appMensajesControlFormulario]="formularioProducto.controls['nombre'].errors" id="control-nombre">
           <nz-input-group nzPrefixIcon="plus-square">
               <input nz-input id="nombre" type="text" formControlName="nombre" placeholder="Ingrese el nombre del producto" />
             </nz-input-group>

@@ -62,8 +62,6 @@ export class ErrorHandlingService {
   }
 
   private mostrarModalErrorGeneral(errorDetail: Mensaje): NzModalRef {
-    console.log('Error en la petición: ');
-    console.log(errorDetail);
     return this.nzModalService.create<ModalErrorGeneralComponent, Mensaje>({
       nzData: errorDetail,
       nzContent: ModalErrorGeneralComponent,

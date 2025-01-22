@@ -1,6 +1,9 @@
 import { Injectable } from "@angular/core";
 import * as Papa from 'papaparse';
-import { WorkBook, utils } from "xlsx";
+import { WorkBook, utils, writeFile } from "xlsx";
+/* https://docs.sheetjs.com/docs/demos/frontend/angular/
+  https://docs.sheetjs.com/docs/getting-started/installation/frameworks
+*/
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +38,13 @@ export class ArchivoService {
     public generarHojaExcelGenerica(workBook: WorkBook, nombreHoja: string, encabezado: string[], datos: any[]): void {
       const worksheet = utils.aoa_to_sheet([encabezado, ...datos]);
       utils.book_append_sheet(workBook, worksheet, nombreHoja);
+    }
+
+    createWorkbook(): WorkBook {
+      return utils.book_new();
+    }
+
+    writeFile(workbook: WorkBook, fileName: string): void {
+      writeFile(workbook, fileName, { compression: true });
     }
 }

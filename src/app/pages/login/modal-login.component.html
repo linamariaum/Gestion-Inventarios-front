@@ -15,7 +15,7 @@
       <div class="col-lg-8">
         <label for="password">Contraseña <span class="required">*</span></label>
         <nz-form-item>
-          <nz-form-control [appMensajesControlFormulario]="formularioLogin.controls['password'].errors">
+          <nz-form-control [appMensajesControlFormulario]="formularioLogin.controls['password'].errors" id="control-password">
               <nz-input-group nzPrefixIcon="lock">
                   <input nz-input id="password" type="password" formControlName="password" placeholder="Ingrese la contraseña" />
               </nz-input-group>
